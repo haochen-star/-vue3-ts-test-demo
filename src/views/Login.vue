@@ -20,7 +20,10 @@
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="login-btn" @click="submitForm()"
+        <el-button
+          type="primary"
+          class="login-btn"
+          @click="submitForm(ruleFormRef)"
           >登录</el-button
         >
         <el-button class="login-btn" @click="resetForm()">重置</el-button>
@@ -30,10 +33,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, ref } from 'vue'
 import { LoginData } from '../type/login'
-import type { FormRules } from 'element-plus'
-// const ruleFormRef = ref<FormInstance>()
+import type { FormRules, FormInstance } from 'element-plus'
+import { login } from '../request/api'
+
+const ruleFormRef = ref<FormInstance>()
 
 export default defineComponent({
   setup() {
@@ -49,14 +54,28 @@ export default defineComponent({
       data.ruleForm.username = ''
       data.ruleForm.password = ''
     }
-    const submitForm = () => {
-      console.log('提交表单')
+    const submitForm = (formEl: FormInstance | undefined) => {
+      if (!formEl) return
+      formEl.validate(valid => {
+        if (valid) {
+          console.log('submit!')
+          login(data.ruleForm)
+            .then(res => {
+              console.log(res)
+            })
+            .catch(e => console.log(e))
+        } else {
+          console.log('error submit!')
+          return false
+        }
+      })
     }
     return {
       ...toRefs(data),
       rules,
       resetForm,
       submitForm,
+      ruleFormRef,
     }
   },
 })
