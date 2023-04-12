@@ -12,7 +12,6 @@ Mock.mock('/api/user', 'get', user)
 
 Mock.mock('/api/user', 'post', options => {
   const { username, password } = JSON.parse(options.body)
-  console.log(username, password)
   // return 的是请求中的res.data
   return {
     code: 200,

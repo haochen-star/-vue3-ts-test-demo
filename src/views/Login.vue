@@ -37,11 +37,12 @@ import { defineComponent, reactive, toRefs, ref } from 'vue'
 import { LoginData } from '../type/login'
 import type { FormRules, FormInstance } from 'element-plus'
 import { login } from '../request/api'
-
-const ruleFormRef = ref<FormInstance>()
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup() {
+    const ruleFormRef = ref<FormInstance>()
+    const router = useRouter() // ==> 相当于this.$router
     const data = reactive(new LoginData())
     const rules = reactive<FormRules>({
       username: [{ required: true, message: '填入用户名', trigger: 'blur' }],
@@ -58,10 +59,14 @@ export default defineComponent({
       if (!formEl) return
       formEl.validate(valid => {
         if (valid) {
-          console.log('submit!')
           login(data.ruleForm)
             .then(res => {
-              console.log(res)
+              if (res.data) {
+                // 保存token
+                localStorage.setItem('token', res.data.token)
+                // 跳转页面
+                router.push('/table')
+              }
             })
             .catch(e => console.log(e))
         } else {

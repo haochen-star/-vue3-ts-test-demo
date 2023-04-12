@@ -22,7 +22,7 @@ service.interceptors.response.use(
     if (code != 200) {
       return Promise.reject()
     }
-    return res.data.data
+    return res.data
   },
   err => console.log(err)
 )
