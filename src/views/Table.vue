@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { TableData, TableDataItem } from '../type/table'
+import { TableDataItem } from '../type/table'
 
 import _ from 'lodash'
 
@@ -22,58 +22,56 @@ export default defineComponent({
         {
           name: 'John',
           age: 18,
-          address: 'No. 1, West Road',
+          address: 'No. 1, West Road'
         },
         {
           name: 'James',
           age: 18,
-          address: 'No. 4, North Road',
+          address: 'No. 4, North Road'
         },
         {
           name: 'Tom',
           age: 21,
-          address: 'No. 2, East Road',
+          address: 'No. 2, East Road'
         },
         {
           name: 'Mary',
           age: 21,
-          address: 'No. 3, South Road',
+          address: 'No. 3, South Road'
         },
         {
           name: 'Carl',
           age: 18,
-          address: 'No. 3, South Road',
+          address: 'No. 3, South Road'
         },
         {
           name: 'Mary',
           age: 21,
-          address: 'No. 3, South Road',
+          address: 'No. 3, South Road'
         },
         {
           name: 'Mary',
           age: 21,
-          address: 'No. 3, South Road',
+          address: 'No. 3, South Road'
         },
         {
           name: 'Mary',
           age: 21,
-          address: 'No. 3, South Road',
-        },
-      ],
+          address: 'No. 3, South Road'
+        }
+      ]
     }
   },
   computed: {},
   methods: {
-    sortData(tableData: TableData) {
+    sortData(tableData: TableDataItem[]) {
       const arr = _.cloneDeep(tableData)
       return arr
-        .sort((a: TableDataItem, b: TableDataItem) => a.age - b.age)
-        .sort((a: TableDataItem, b: TableDataItem) =>
-          a.name.localeCompare(b.name)
-        )
+        .sort((a, b) => a.age - b.age)
+        .sort((a, b) => a.name.localeCompare(b.name))
     },
     arraySpanMethod({ row, column, rowIndex, columnIndex }: any) {
-      const sortedData = this.sortData(this.tableData)
+      const sortedData: any[] = this.sortData(this.tableData)
       if (columnIndex === 0 || columnIndex === 1) {
         if (
           rowIndex > 0 &&
@@ -81,7 +79,7 @@ export default defineComponent({
         ) {
           return {
             rowspan: 0,
-            colspan: 0,
+            colspan: 0
           }
         } else {
           let rowspan = 1
@@ -96,16 +94,16 @@ export default defineComponent({
 
           return {
             rowspan,
-            colspan: 1,
+            colspan: 1
           }
         }
       } else {
         return {
           rowspan: 1,
-          colspan: 1,
+          colspan: 1
         }
       }
-    },
-  },
+    }
+  }
 })
 </script>
