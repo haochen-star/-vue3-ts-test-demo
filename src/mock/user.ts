@@ -1,5 +1,4 @@
 // mock/user.js
-
 import Mock from 'mockjs'
 
 const user = {
@@ -10,7 +9,7 @@ const user = {
 
 Mock.mock('/api/user', 'get', user)
 
-Mock.mock('/api/user', 'post', options => {
+Mock.mock('/api/user', 'post', (options: { body: string }) => {
   const { username, password } = JSON.parse(options.body)
   // return 的是请求中的res.data
   return {
@@ -19,7 +18,8 @@ Mock.mock('/api/user', 'post', options => {
       msg: '登录成功',
       success: true,
       token: 'admin_token',
-      username: 'admin',
+      username,
+      password,
     },
   }
 })

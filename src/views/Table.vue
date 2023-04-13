@@ -10,8 +10,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { TableData, TableDataItem } from '../type/table'
+
 import _ from 'lodash'
-import { ElTable, ElTableColumn } from 'element-plus'
 
 export default defineComponent({
   name: 'MyTable',
@@ -63,11 +64,13 @@ export default defineComponent({
   },
   computed: {},
   methods: {
-    sortData(tableData: any[]) {
+    sortData(tableData: TableData) {
       const arr = _.cloneDeep(tableData)
       return arr
-        .sort((a, b) => a.age - b.age)
-        .sort((a, b) => a.name.localeCompare(b.name))
+        .sort((a: TableDataItem, b: TableDataItem) => a.age - b.age)
+        .sort((a: TableDataItem, b: TableDataItem) =>
+          a.name.localeCompare(b.name)
+        )
     },
     arraySpanMethod({ row, column, rowIndex, columnIndex }: any) {
       const sortedData = this.sortData(this.tableData)
