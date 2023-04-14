@@ -1,13 +1,13 @@
 // mock/user.js
 import Mock from 'mockjs'
 
-const user = {
-  name: 'John',
-  age: 18,
-  gender: 'male',
-}
+// const user = {
+//   name: 'John',
+//   age: 18,
+//   gender: 'male',
+// }
 
-Mock.mock('/api/user', 'get', user)
+// Mock.mock('/api/user', 'get', user)
 
 Mock.mock('/api/user', 'post', (options: { body: string }) => {
   const { username, password } = JSON.parse(options.body)
@@ -19,7 +19,7 @@ Mock.mock('/api/user', 'post', (options: { body: string }) => {
       success: true,
       token: 'admin_token',
       username,
-      password,
-    },
+      password
+    }
   }
 })
