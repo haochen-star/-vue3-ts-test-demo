@@ -2,8 +2,8 @@ import axios from 'axios'
 const service = axios.create({
   timeout: 5000,
   headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-  },
+    'Content-Type': 'application/json;charset=utf-8'
+  }
 })
 
 // 请求拦截
@@ -18,8 +18,8 @@ service.interceptors.request.use(config => {
 // 响应拦截
 service.interceptors.response.use(
   res => {
-    const code: number = res.data.code
-    if (code != 200) {
+    const status: number = res.status
+    if (status != 200) {
       return Promise.reject()
     }
     return res.data

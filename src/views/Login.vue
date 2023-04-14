@@ -48,8 +48,8 @@ export default defineComponent({
       username: [{ required: true, message: '填入用户名', trigger: 'blur' }],
       password: [
         { required: true, message: '填入密码', trigger: ['blur', 'change'] },
-        { min: 3, max: 6, message: '长度为3-6', trigger: ['blur', 'change'] },
-      ],
+        { min: 3, max: 6, message: '长度为3-6', trigger: ['blur', 'change'] }
+      ]
     })
     const resetForm = () => {
       data.ruleForm.username = ''
@@ -80,9 +80,9 @@ export default defineComponent({
       rules,
       resetForm,
       submitForm,
-      ruleFormRef,
+      ruleFormRef
     }
-  },
+  }
 })
 </script>
 

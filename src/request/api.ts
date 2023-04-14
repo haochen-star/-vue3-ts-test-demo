@@ -6,8 +6,8 @@ interface loginData {
 }
 export function login(data: loginData): Promise<AxiosResponse> {
   return service({
-    url: '/api/user',
+    url: '/api/user/login',
     method: 'post',
-    data,
+    data
   })
 }
