@@ -12,8 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "types": ["node", "webpack-env", "element-plus/global"],
+    "typeRoots": ["./node_modules/@types", "./src/types"], // ts会去这些地方找定义的类型
+    "types": ["node", "webpack-env", "element-plus/global"], // 碰到这些文件，ts会去检索
     "paths": {
       "@/*": ["src/*"]
     },
