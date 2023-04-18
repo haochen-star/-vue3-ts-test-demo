@@ -1,6 +1,33 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Layout from '../layout/Index.vue'
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'layout',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        meta: {
+          isShow: true,
+          title: '主页'
+        },
+        component: () => import('../views/dashboard/Index.vue')
+      },
+      {
+        path: '/table',
+        name: 'table',
+        meta: {
+          isShow: true,
+          title: '表格'
+        },
+        component: () => import('../views/table/TableRowspan.vue')
+      }
+    ]
+  },
   {
     path: '/about',
     name: 'About',
@@ -16,11 +43,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/table',
-    name: 'table',
-    component: () => import('../views/Table.vue')
-  },
-  {
     path: '/permission',
     name: 'permission',
     component: () => import('../views/permission/Index.vue')
@@ -28,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 

@@ -10,12 +10,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { TableDataItem } from '../type/table'
+import { TableDataItem } from '../../type/table'
 
 import _ from 'lodash'
 
 export default defineComponent({
-  name: 'MyTable',
+  name: 'TableRowspan',
   data() {
     return {
       tableData: [
